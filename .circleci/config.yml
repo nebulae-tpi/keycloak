@@ -1,0 +1,47 @@
+version: 2
+### NEEDED ENV VARS:
+  # QA_GCLOUD_SERVICE_KEY
+  # QA_GCLOUD_PROJECT
+  # QA_GCLOUD_ZONE
+  # QA_GCLOUD_CLUSTER
+jobs:
+  build:
+    working_directory: /workspace
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build and Push Docker image
+          command: |
+            sh scripts/build-docker-hub.sh      
+  deploy_qa:
+    working_directory: /workspace
+    docker:
+      - image: google/cloud-sdk:latest
+    steps:
+      - checkout
+      - run:
+          name: Setup gcloud & kubectl
+          command: |
+            echo $QA_GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > /root/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file /root/gcloud-service-key.json            
+            gcloud --quiet config set project $QA_GCLOUD_PROJECT
+            gcloud --quiet config set compute/zone $QA_GCLOUD_ZONE
+            gcloud --quiet container clusters get-credentials $QA_GCLOUD_CLUSTER
+      - run:
+          name: Deploy on Kubernetes
+          command: |
+            kubectl apply -f /workspace/deployment/gke/
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build:
+          context: lab-microservices
+      - deploy_qa:
+          context: lab-microservices
+          requires:
+            - build

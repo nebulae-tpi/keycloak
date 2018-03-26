@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-keycloak
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: keycloak
+---
+apiVersion: apps/v1beta2 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:      
+      containers:
+      - image: nebulae/keycloak:3.4.3.11
+        name: keycloak
+        env:        
+        - name: MYSQL_ADDR
+          value: keycloak-mysql
+        - name: MYSQL_PORT_3306_TCP_ADDR
+          value: keycloak-mysql
+        - name: MYSQL_PORT_3306_TCP_PORT
+          value: '3306'
+        - name: KEYCLOAK_USER
+          valueFrom:
+            secretKeyRef:
+              name: keycloak
+              key: keycloak_user
+        - name: KEYCLOAK_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: keycloak
+              key: keycloak_password
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: keycloak
+              key: mysql_database
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: keycloak
+              key: mysql_user
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: keycloak
+              key: mysql_password
+        ports:
+        - containerPort: 8080
+          name: keycloak

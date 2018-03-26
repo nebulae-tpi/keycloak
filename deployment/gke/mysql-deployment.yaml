@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak-mysql
+spec:
+  ports:
+  - port: 3306
+    name: keycloak-mysql
+  selector:
+    app: keycloak-mysql
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: keycloak-mysql-pv-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1beta2 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: keycloak-mysql
+spec:
+  selector:
+    matchLabels:
+      app: keycloak-mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: keycloak-mysql
+    spec:
+      containers:
+      - image: mysql:5.6
+        name: keycloak-mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: keycloak
+              key: mysql_root_password
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: keycloak
+              key: mysql_database
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: keycloak
+              key: mysql_user
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: keycloak
+              key: mysql_password
+        ports:
+        - containerPort: 3306
+          name: keycloak-mysql
+        volumeMounts:
+        - name: keycloak-mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: keycloak-mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: keycloak-mysql-pv-claim
