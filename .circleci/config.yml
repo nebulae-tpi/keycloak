@@ -1,9 +1,4 @@
 version: 2
-### NEEDED ENV VARS:
-  # QA_GCLOUD_SERVICE_KEY
-  # QA_GCLOUD_PROJECT
-  # QA_GCLOUD_ZONE
-  # QA_GCLOUD_CLUSTER
 jobs:
   build:
     working_directory: /workspace
@@ -15,8 +10,11 @@ jobs:
       - run:
           name: Build and Push Docker image
           command: |
+            export DOCKERHUB_NAMESPACE=$DOCKERHUB_NAMESPACE
+            export DOCKERHUB_USER=$DOCKERHUB_USER
+            export DOCKERHUB_PASS=$DOCKERHUB_PASS
             sh scripts/build-docker-hub.sh      
-  deploy_qa:
+  deploy_prod:
     working_directory: /workspace
     docker:
       - image: google/cloud-sdk:latest
@@ -25,11 +23,11 @@ jobs:
       - run:
           name: Setup gcloud & kubectl
           command: |
-            echo $QA_GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > /root/gcloud-service-key.json
+            echo $GCP_SERVICE_ACCOUNT_PROD | base64 --decode --ignore-garbage > /root/gcloud-service-key.json
             gcloud auth activate-service-account --key-file /root/gcloud-service-key.json            
-            gcloud --quiet config set project $QA_GCLOUD_PROJECT
-            gcloud --quiet config set compute/zone $QA_GCLOUD_ZONE
-            gcloud --quiet container clusters get-credentials $QA_GCLOUD_CLUSTER
+            gcloud --quiet config set project $GKE_PROJECT_PROD
+            gcloud --quiet config set compute/zone $GKE_ZONE_PROD
+            gcloud --quiet container clusters get-credentials $GKE_CLUSTER
       - run:
           name: Deploy on Kubernetes
           command: |
@@ -40,8 +38,8 @@ workflows:
   build-and-deploy:
     jobs:
       - build:
-          context: lab-microservices
-      - deploy_qa:
-          context: lab-microservices
+          context: TPM
+      - deploy_prod:
+          context: TPM
           requires:
             - build
