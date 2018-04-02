@@ -1,6 +1,8 @@
 FROM jboss/keycloak:3.4.3.Final
 LABEL Author=sebastian.molano@nebulae.com.co
 
+ENV PROXY_ADDRESS_FORWARDING true
+
 USER jboss
 COPY configuration/ /opt/jboss/keycloak/standalone/configuration/
 COPY themes/ /opt/jboss/keycloak/themes/
