@@ -14,7 +14,7 @@ services:
       - keycloak_mysql_data:/var/lib/mysql
 
   keycloak:
-      image: nebulae/keycloak:latest
+      image: nebulaetpm/keycloak:latest
       environment:
         - MYSQL_ADDR=keycloak-mysql
         - MYSQL_PORT_3306_TCP_ADDR=keycloak-mysql
