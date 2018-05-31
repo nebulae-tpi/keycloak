@@ -20,15 +20,13 @@ spec:
   selector:
     matchLabels:
       app: keycloak
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
         app: keycloak
     spec:      
       containers:
-      - image: nebulaetpm/keycloak:3.4.3.6
+      - image: nebulaetpm/keycloak:3.4.3.10
         name: keycloak
         env:        
         - name: MYSQL_ADDR
