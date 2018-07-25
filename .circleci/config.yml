@@ -38,8 +38,8 @@ workflows:
   build-and-deploy:
     jobs:
       - build:
-          context: TPM
+          context: PYXIS
       - deploy_prod:
-          context: TPM
+          context: PYXIS
           requires:
             - build
