@@ -93,7 +93,7 @@
     <app-root>
         <style>
             .kc-background {
-                background: url('${resourceUrl}/img/keycloak-bg.png') top left no-repeat;
+                background: url('${resourceUrl}/img/stars-bg.png') top left no-repeat;
                 background-size: cover;
             }
 
