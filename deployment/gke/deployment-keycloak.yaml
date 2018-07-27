@@ -26,7 +26,7 @@ spec:
         app: keycloak
     spec:      
       containers:
-      - image: nebulaepyxis/keycloak:3.4.3.14
+      - image: nebulaepyxis/keycloak:3.4.3.15
         name: keycloak
         env:        
         - name: MYSQL_ADDR
