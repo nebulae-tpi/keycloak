@@ -1,5 +1,5 @@
 #!/bin/bash
-export DOCKERHUB_NAMESPACE=nebulaepyxis
+export DOCKERHUB_NAMESPACE=nebulaetpi
 export DOCKERHUB_IMAGE=keycloak
 export DOCKERHUB_TAG=latest
 

@@ -14,7 +14,7 @@ jobs:
             export DOCKERHUB_USER=$DOCKERHUB_USER
             export DOCKERHUB_PASS=$DOCKERHUB_PASS
             sh scripts/build-docker-hub.sh      
-  deploy_prod:
+  deploy_dev:
     working_directory: /workspace
     docker:
       - image: google/cloud-sdk:latest
@@ -38,8 +38,8 @@ workflows:
   build-and-deploy:
     jobs:
       - build:
-          context: PYXIS
-      - deploy_prod:
-          context: PYXIS
+          context: TPI
+      - deploy_dev:
+          context: TPI
           requires:
             - build
