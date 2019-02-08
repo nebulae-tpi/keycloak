@@ -33,41 +33,27 @@ jobs:
           command: |
             kubectl apply -f /workspace/deployment/gke/
 
-  deploy_prod:
-    working_directory: /workspace
-    docker:
-      - image: google/cloud-sdk:latest
-    steps:
-      - checkout
-      - run:
-          name: Setup gcloud & kubectl
-          command: |
-            echo $GCP_SERVICE_ACCOUNT_PROD | base64 --decode --ignore-garbage > /root/gcloud-service-key.json
-            gcloud auth activate-service-account --key-file /root/gcloud-service-key.json            
-            gcloud --quiet config set project $GKE_PROJECT_PROD
-            gcloud --quiet config set compute/zone $GKE_ZONE_PROD
-            gcloud --quiet container clusters get-credentials $GKE_CLUSTER
-      - run:
-          name: Deploy on Kubernetes
-          command: |
-            kubectl apply -f /workspace/deployment/gke/
-
 workflows:
   version: 2
   build-and-deploy:
     jobs:
+      #- hold-dev: 
+      #    type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
       - build:
           context: TPI
+          #requires:
+          #  - hold-dev
       - deploy_dev:
           context: TPI
+          name: deploy_dev-dev
           requires:
             - build
-      - hold: # <<< A job that will require manual approval in the CircleCI web application.
-          context: TPI
+      - hold-prod: # <<< A job that will require manual approval in the CircleCI web application.
           type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
           requires: # We only run the "hold" job when test2 has succeeded
-            - deploy_dev
-      - deploy_prod:
-          context: TPI
+            - build
+      - deploy_dev:
+          context: TPI_PROD
+          name: deploy_dev-prod
           requires: # We only run the "hold" job when test2 has succeeded
-            - hold
+            - hold-prod
