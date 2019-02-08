@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   build:
     working_directory: /workspace
@@ -34,7 +34,7 @@ jobs:
             kubectl apply -f /workspace/deployment/gke/
 
 workflows:
-  version: 2
+  version: 2.1
   build-and-deploy:
     jobs:
       #- hold-dev: 
