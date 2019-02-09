@@ -37,18 +37,14 @@ workflows:
   version: 2.1
   build-and-deploy:
     jobs:
-      #- hold-dev: 
-      #    type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
       - build:
           context: TPI
-          #requires:
-          #  - hold-dev
       - deploy_dev:
           context: TPI
-          name: deploy_dev-dev
+          name: deploy_dev
           requires:
             - build
-      - hold-prod: # <<< A job that will require manual approval in the CircleCI web application.
+      - hold: # <<< A job that will require manual approval in the CircleCI web application.
           type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
           requires: # We only run the "hold" job when test2 has succeeded
             - build
@@ -56,4 +52,4 @@ workflows:
           context: TPI_PROD
           name: deploy_dev-prod
           requires: # We only run the "hold" job when test2 has succeeded
-            - hold-prod
+            - hold
