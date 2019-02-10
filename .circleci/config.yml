@@ -51,4 +51,5 @@ workflows:
           context: TPI_PROD
           name: deploy_dev-prod
           requires: # We only run the "hold" job when test2 has succeeded
+            - build
             - hold
