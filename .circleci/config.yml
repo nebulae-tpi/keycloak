@@ -31,6 +31,7 @@ jobs:
       - run:
           name: Deploy on Kubernetes
           command: |
+            test "$ENVIRONMENT" = "prod" && for xi in $(ls /workspace/deployment/gke/*.y*ml); do sed -i s/nebulaetpi/nebulaetpiprod/ $xi ; done
             kubectl apply -f /workspace/deployment/gke/
 
 workflows:
@@ -41,13 +42,11 @@ workflows:
           context: TPI
       - deploy_dev:
           context: TPI
-          name: deploy_dev
+          name: deploy_dev-dev
           requires:
             - build
       - hold: # <<< A job that will require manual approval in the CircleCI web application.
           type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
-          requires: # We only run the "hold" job when test2 has succeeded
-            - build
       - deploy_dev:
           context: TPI_PROD
           name: deploy_dev-prod
