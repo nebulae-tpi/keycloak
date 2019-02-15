@@ -43,7 +43,7 @@ workflows:
           context: TPI
       - build:
           name: build-prod
-          context: TPI
+          context: TPI_PROD
       - deploy_dev:
           context: TPI
           name: deploy_dev-dev
