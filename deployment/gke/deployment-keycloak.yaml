@@ -26,7 +26,7 @@ spec:
         app: keycloak
     spec:      
       containers:
-      - image: nebulaetpi/keycloak:3.4.3.19
+      - image: DOCKERHUB/keycloak:3.4.3.19
         name: keycloak
         env:        
         - name: MYSQL_ADDR
