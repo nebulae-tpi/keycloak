@@ -31,7 +31,7 @@ jobs:
       - run:
           name: Deploy on Kubernetes
           command: |
-            for xi in $(ls ~/nebulae/repo/deployment/gke/*.y*ml); do sed -i s/DOCKERHUB/$DOCKERHUB_NAMESPACE/ $xi ; done
+            for xi in $(ls /workspace/deployment/gke/*.y*ml); do sed -i s/DOCKERHUB/$DOCKERHUB_NAMESPACE/ $xi ; done
             kubectl apply -f /workspace/deployment/gke/
 
 workflows:
