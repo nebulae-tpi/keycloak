@@ -63,3 +63,10 @@ spec:
         ports:
         - containerPort: 8080
           name: keycloak
+        resources:
+          limits:
+            cpu: 200m
+            memory: 900Mi
+          requests:
+            cpu: 50m
+            memory: 100Mi
