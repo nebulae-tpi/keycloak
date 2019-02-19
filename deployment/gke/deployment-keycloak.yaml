@@ -70,3 +70,10 @@ spec:
           requests:
             cpu: 50m
             memory: 100Mi
+        readinessProbe:
+          httpGet:
+            path: /auth
+            port: 8080
+            httpHeaders:
+              initialDelaySeconds: 30
+              periodSeconds: 5
