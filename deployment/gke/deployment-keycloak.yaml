@@ -74,5 +74,5 @@ spec:
           httpGet:
             path: /auth
             port: 8080
-          initialDelaySeconds: 30
+          initialDelaySeconds: 150
           periodSeconds: 5
