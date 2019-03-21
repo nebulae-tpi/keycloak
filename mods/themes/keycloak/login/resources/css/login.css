@@ -1,5 +1,5 @@
 .login-pf body {
-  background: #0f0f0f url("../img/stars-bg.jpg") top left no-repeat;
+  background: #0f0f0f url("../img/hong-kong-1990268_1920.jpg") top left no-repeat;
   background-size: cover;
 }
 
@@ -75,7 +75,7 @@ a#kc-current-locale-link::after {
 }
 
 #kc-logo-wrapper {
-  background-image: url("../img/nebulae_logo.png");
+  background-image: url("../img/txplus_logo.png");
   background-repeat: no-repeat;
 
   height: 150px;

@@ -93,7 +93,7 @@
     <app-root>
         <style>
             .kc-background {
-                background: url('${resourceUrl}/img/stars-bg.jpg') top left no-repeat;
+                background: url('${resourceUrl}/img/hong-kong-1990268_1920.jpg') top left no-repeat;
                 background-size: cover;
             }
 
