@@ -48,13 +48,18 @@ jobs:
                     - -c
                     - |
                       echo "Copying theme..."
-                      cp -R /mytheme/* /theme
+                      cp -R /mythemes/theme-ne/* /theme
+                      cp -R /mythemes/base-ne/* /themebase
                   volumeMounts:
                     - name: theme
                       mountPath: /theme
+                    - name: themebase
+                      mountPath: /themebase
               extraVolumeMounts: |
                 - name: theme
                   mountPath: /opt/jboss/keycloak/themes/mytheme
+                - name: themebase
+                  mountPath: /opt/jboss/keycloak/themes/mybase
               extraVolumes: |
                 - name: theme
                   emptyDir: {}
@@ -63,7 +68,6 @@ jobs:
                   /subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding, value=true)
                 custom: |
                   /subsystem=keycloak-server/spi=connectionsJpa/provider=default/:map-put(name=properties,key=migrationStrategy,value=update)
-                  /subsystem=keycloak-server/theme=defaults:write-attribute(name=welcomeTheme,value=${env.KEYCLOAK_DEFAULT_THEME:mytheme})
                   /subsystem=keycloak-server/theme=defaults:write-attribute(name=default,value=${env.KEYCLOAK_DEFAULT_THEME:mytheme})
               persistence:
                 deployPostgres: false
