@@ -33,7 +33,7 @@ jobs:
           command: |
             export DOCKERHUB_IMAGE=keycloak-theme
             export DOCKERHUB_TAG=1.0
-            cat << \EOF > ./values.yaml
+            cat \<\< \EOF > ./values.yaml
             keycloak:
               preStartScript: |
                 cp /opt/jboss/keycloak/themes/mytheme/
