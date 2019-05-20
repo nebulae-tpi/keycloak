@@ -63,6 +63,8 @@ jobs:
               extraVolumes: |
                 - name: theme
                   emptyDir: {}
+                - name: themebase
+                  emptyDir: {}
               cli:
                 reverseProxy: |
                   /subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding, value=true)
