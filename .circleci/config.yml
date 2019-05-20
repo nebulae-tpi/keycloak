@@ -78,6 +78,7 @@ jobs:
               existingSecretKey: keycloak_password
             EOF
             sed -i -e "s/IMAGE_THEME/$DOCKERHUB_NAMESPACE\/$DOCKERHUB_IMAGE:$DOCKERHUB_TAG/g" values.yaml
+            cat ./values.yaml
             helm upgrade --install keycloak ./helm-chart/keycloak -f ./values.yaml
 
 workflows:
