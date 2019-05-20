@@ -35,8 +35,6 @@ jobs:
             export DOCKERHUB_TAG=1.0
             cat \<< \EOF > ./values.yaml
             keycloak:
-              preStartScript: |
-                cp /opt/jboss/keycloak/themes/mytheme/
               image:
                 tag: 6.0.1
               replicas: 2
