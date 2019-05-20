@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   build:
-    working_directory: /workspace
+    working_directory: ~/workspace
     docker:
       - image: docker:17.05.0-ce-git
     steps:
@@ -15,7 +15,7 @@ jobs:
             export DOCKERHUB_PASS=$DOCKERHUB_PASS
             sh scripts/build-docker-hub.sh      
   deploy_dev:
-    working_directory: /workspace
+    working_directory: ~/workspace
     docker:
       - image: kiwigrid/gcloud-kubectl-helm
     steps:
