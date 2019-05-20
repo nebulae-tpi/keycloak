@@ -17,13 +17,13 @@ jobs:
   deploy_dev:
     working_directory: /workspace
     docker:
-      - image: google/cloud-sdk:latest
+      - image: kiwigrid/gcloud-kubectl-helm
     steps:
       - checkout
       - run:
           name: Setup gcloud & kubectl
           command: |
-            echo $GCP_SERVICE_ACCOUNT_DEV | base64 --decode --ignore-garbage > /root/gcloud-service-key.json
+            echo $GCP_SERVICE_ACCOUNT_DEV | base64 -d > /root/gcloud-service-key.json
             gcloud auth activate-service-account --key-file /root/gcloud-service-key.json            
             gcloud --quiet config set project $GKE_PROJECT_DEV
             gcloud --quiet config set compute/zone $GKE_ZONE_DEV
@@ -31,8 +31,54 @@ jobs:
       - run:
           name: Deploy on Kubernetes
           command: |
-            for xi in $(ls /workspace/deployment/gke/*.y*ml); do sed -i s/DOCKERHUB/$DOCKERHUB_NAMESPACE/ $xi ; done
-            kubectl apply -f /workspace/deployment/gke/
+            export DOCKERHUB_IMAGE=keycloak-theme
+            export DOCKERHUB_TAG=1.0
+            cat << \EOF > ./values.yaml
+            keycloak:
+              preStartScript: |
+                cp /opt/jboss/keycloak/themes/mytheme/
+              image:
+                tag: 6.0.1
+              replicas: 2
+              extraInitContainers: |
+                - name: theme-provider
+                  image: IMAGE_THEME
+                  imagePullPolicy: IfNotPresent
+                  command:
+                    - sh
+                  args:
+                    - -c
+                    - |
+                      echo "Copying theme..."
+                      cp -R /mytheme/* /theme
+                  volumeMounts:
+                    - name: theme
+                      mountPath: /theme
+              extraVolumeMounts: |
+                - name: theme
+                  mountPath: /opt/jboss/keycloak/themes/mytheme
+              extraVolumes: |
+                - name: theme
+                  emptyDir: {}
+              cli:
+                reverseProxy: |
+                  /subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding, value=true)
+                custom: |
+                  /subsystem=keycloak-server/spi=connectionsJpa/provider=default/:map-put(name=properties,key=migrationStrategy,value=update)
+                  /subsystem=keycloak-server/theme=defaults:write-attribute(name=default,value=${env.KEYCLOAK_DEFAULT_THEME:mytheme})
+              persistence:
+                deployPostgres: false
+                dbVendor: mysql
+                dbPort: 3306
+                dbHost: keycloak-mysql
+                existingSecret: keycloak
+                existingSecretKey: mysql_password
+              username: admon
+              existingSecret: keycloak
+              existingSecretKey: keycloak_password
+            EOF
+            sed -i -e "s/IMAGE_THEME/$DOCKERHUB_NAMESPACE\/$DOCKERHUB_IMAGE:$DOCKERHUB_TAG/g" values.yaml
+            helm upgrade --install keycloak ./helm-chart/keycloak -f ./values.yaml
 
 workflows:
   version: 2.1
