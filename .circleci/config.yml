@@ -23,8 +23,8 @@ jobs:
       - run:
           name: Setup gcloud & kubectl
           command: |
-            echo $GCP_SERVICE_ACCOUNT_DEV | base64 -d > /root/gcloud-service-key.json
-            gcloud auth activate-service-account --key-file /root/gcloud-service-key.json            
+            echo $GCP_SERVICE_ACCOUNT_DEV | base64 -d > ~/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file ~/gcloud-service-key.json            
             gcloud --quiet config set project $GKE_PROJECT_DEV
             gcloud --quiet config set compute/zone $GKE_ZONE_DEV
             gcloud --quiet container clusters get-credentials $GKE_CLUSTER
