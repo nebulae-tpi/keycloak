@@ -64,6 +64,7 @@ jobs:
                 custom: |
                   /subsystem=keycloak-server/spi=connectionsJpa/provider=default/:map-put(name=properties,key=migrationStrategy,value=update)
                   /subsystem=keycloak-server/theme=defaults:write-attribute(name=welcomeTheme,value=${env.KEYCLOAK_DEFAULT_THEME:mytheme})
+                  /subsystem=keycloak-server/theme=defaults:write-attribute(name=default,value=${env.KEYCLOAK_DEFAULT_THEME:mytheme})
               persistence:
                 deployPostgres: false
                 dbVendor: mysql
