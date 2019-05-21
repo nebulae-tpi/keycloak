@@ -79,11 +79,9 @@ a#kc-current-locale-link::after {
 #kc-logo-wrapper {
     background-image: url(../img/txplus_logo.png);
     background-repeat: no-repeat;
-    height: 150px;
-    width: 157px;
-    /**
+    height: 63px;
+    width: 300px;
     margin: 62px auto 0;
-    /**/
 }
 
 div.kc-logo-text {
