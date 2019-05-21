@@ -32,7 +32,7 @@ jobs:
           name: Deploy on Kubernetes
           command: |
             export DOCKERHUB_IMAGE=keycloak-theme
-            export DOCKERHUB_TAG=latest
+            export DOCKERHUB_TAG=1.0.3
             cat \<< \EOF > ./values.yaml
             keycloak:
               image:
