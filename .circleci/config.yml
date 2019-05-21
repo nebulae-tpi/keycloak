@@ -32,7 +32,8 @@ jobs:
           name: Deploy on Kubernetes
           command: |
             export DOCKERHUB_IMAGE=keycloak-theme
-            export DOCKERHUB_TAG=1.0.3
+            export DOCKERHUB_TAG=latest
+            helm repo add codecentric https://codecentric.github.io/helm-charts
             cat \<< \EOF > ./values.yaml
             keycloak:
               image:
@@ -41,7 +42,7 @@ jobs:
               extraInitContainers: |
                 - name: theme-provider
                   image: IMAGE_THEME
-                  imagePullPolicy: IfNotPresent
+                  imagePullPolicy: Always
                   command:
                     - sh
                   args:
@@ -83,7 +84,7 @@ jobs:
             EOF
             sed -i -e "s/IMAGE_THEME/$DOCKERHUB_NAMESPACE\/$DOCKERHUB_IMAGE:$DOCKERHUB_TAG/g" values.yaml
             cat ./values.yaml
-            helm upgrade --install keycloak ./helm-chart/keycloak -f ./values.yaml
+            helm upgrade --install --version 4.11.2 keycloak codecentric/keycloak -f ./values.yaml
 
 workflows:
   version: 2.1
