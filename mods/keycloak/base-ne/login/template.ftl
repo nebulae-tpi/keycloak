@@ -68,31 +68,6 @@
               </div>
           </#if>
 
-	  <script>
-	      var params = document.location.href.split("?");
-	      var paramsArray = params[1].split('&');
-	      var clientId = paramsArray.find(e => e.includes("client_id")).replace("client_id=", "");
-
-	      var intervalRefreshId = setInterval(function() {
-		  var kcFormRef = document.getElementById("kc-form");
-		  console.log("waiting for kc-form..");
-		  if(kcFormRef){
-		      if(clientId == "CLIENT-APP"){
-			  kcFormRef.classList.add("hide-element");
-		      }
-		      clearInterval(intervalRefreshId);
-		  }
-	      }, 10);
-	      /*
-	      setTimeout(()=> {
-		  var kcFormRef = document.getElementById("kc-form");
-		  if(kcFormRef && clientId == "CLIENT-APP" ){
-		      kcFormRef.classList.add("hide-element");
-		  }
-	      }, 150); 
-	      */
-
-	  </script> 
           <#nested "form">
 
           <#if displayInfo>
