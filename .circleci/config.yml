@@ -69,8 +69,8 @@ jobs:
               cli:
                 reverseProxy: |
                   /subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding, value=true)
-                #custom: |
-                #  /subsystem=keycloak-server/spi=connectionsJpa/provider=default/:map-put(name=properties,key=migrationStrategy,value=update)
+                custom: |
+                  /subsystem=keycloak-server/spi=connectionsJpa/provider=default/:map-put(name=properties,key=migrationStrategy,value=update)
               persistence:
                 deployPostgres: false
                 dbVendor: mysql
