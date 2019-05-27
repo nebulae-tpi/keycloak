@@ -299,8 +299,10 @@ a.zocial  {
     div.kc-logo-text {
         margin: 0;
         width: 150px;
+	/**
         height: 32px;
         background-size: 100%;
+	**/
     }
 
     #kc-form {
