@@ -78,7 +78,7 @@
 
         var intervalRefreshId = setInterval(function() {
             var kcFormRef = document.getElementById("kc-form-wrapper");
-            console.log("waiting for kc-form-wrapper...");
+            console.log("waiting for kc-form-wrapper ...");
             if(kcFormRef){
                 if(clientId == "CLIENT-APP"){
                     kcFormRef.classList.add("hide-element");
@@ -87,7 +87,6 @@
         }, 10);
 
         setTimeOut(() => { clearInterval(intervalRefreshId); }, 5000);
-
     </script> 
 
 </@layout.registrationLayout>
