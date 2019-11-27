@@ -17,7 +17,7 @@ jobs:
   deploy_dev:
     working_directory: ~/workspace
     docker:
-      - image: kiwigrid/gcloud-kubectl-helm
+      - image: kiwigrid/gcloud-kubectl-helm:2.15.0-267.0.0-160
     steps:
       - checkout
       - run:
