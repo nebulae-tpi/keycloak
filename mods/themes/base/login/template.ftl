@@ -78,7 +78,7 @@
 
                         var intervalRefreshId = setInterval(function() {
                             var kcFormRef = document.getElementById("kc-form-wrapper");
-                            console.log("[themes/base] waiting for kc-form-wrapper...");
+                            console.log(".[themes/base] waiting for kc-form-wrapper...");
                             if(kcFormRef){
                                 if(clientId == "CLIENT-APP"){
                                     kcFormRef.classList.add("hide-element");
