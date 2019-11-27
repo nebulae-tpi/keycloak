@@ -77,8 +77,8 @@
                         var clientId = paramsArray.find(e => e.includes("client_id")).replace("client_id=", "");
 
                         var intervalRefreshId = setInterval(function() {
-                            var kcFormRef = document.getElementById("kc-form");
-                            console.log("waiting for kc-form..");
+                            var kcFormRef = document.getElementById("kc-form-wrapper");
+                            console.log("[themes/base] waiting for kc-form-wrapper...");
                             if(kcFormRef){
                                 if(clientId == "CLIENT-APP"){
                                     kcFormRef.classList.add("hide-element");

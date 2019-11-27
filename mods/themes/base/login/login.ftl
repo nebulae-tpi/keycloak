@@ -65,6 +65,7 @@
                 <span><b>${msg("noAccount")}</b> <a tabindex="6" href="${url.registrationUrl}">${msg("doRegister")}</a></span>
             </div>
         </#if>
+        
 
         <#if realm.password && social.providers??>
             <div id="kc-social-providers">
