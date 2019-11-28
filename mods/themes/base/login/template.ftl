@@ -72,28 +72,34 @@
                     </#if>
 
                     <script>
-                        var params = document.location.href.split("?");
-                        var paramsArray = params[1].split('&');
-                        var clientId = paramsArray.find(e => e.includes("client_id")).replace("client_id=", "");
+                        function validateFieldsToHide_base(){
+                            var params = document.location.href.split("?");
+                            var paramsArray = params[1].split('&');
+                            var clientId = paramsArray.find(e => e.includes("client_id")).replace("client_id=", "");
 
-                        var intervalRefreshIdbase = setInterval(function() {
-                            var kcFormWrapperRef = document.getElementById("kc-form-wrapper");
-                            console.log(".[themes/base] waiting for kc-form-wrapper...");
-                            if(kcFormWrapperRef){
-                                if(clientId == "CLIENT-APP"){
-                                    kcFormWrapperRef.classList.add("hide-element");
+                            var intervalRefreshIdbase = setInterval(function() {
+                                var kcFormWrapperRef = document.getElementById("kc-form-wrapper");
+                                console.log(".[themes/base] waiting for kc-form-wrapper...");
+                                if(kcFormWrapperRef){
+                                    if(clientId == "CLIENT-APP"){
+                                        kcFormWrapperRef.classList.add("hide-element");
+                                    }
+                                    clearInterval(intervalRefreshIdbase);
+                                }else{
+                                    console.log("No se encuentra #kc-form-wrapper");
                                 }
-                                clearInterval(intervalRefreshIdbase);
-                            }
-                        }, 10);
-                        /*
-                        setTimeout(()=> {
-                            var kcFormRef = document.getElementById("kc-form");
-                            if(kcFormRef && clientId == "CLIENT-APP" ){
-                                kcFormRef.classList.add("hide-element");
-                            }
-                        }, 150); 
-                        */
+                            }, 1000);
+                            /*
+                            setTimeout(()=> {
+                                var kcFormRef = document.getElementById("kc-form");
+                                if(kcFormRef && clientId == "CLIENT-APP" ){
+                                    kcFormRef.classList.add("hide-element");
+                                }
+                            }, 150); 
+                            */
+                        }
+
+                        validateFieldsToHide_base();                        
 
                     </script> 
                      

@@ -72,20 +72,25 @@
     </#if>
 
     <script>
-        var params = document.location.href.split("?");
-        var paramsArray = params[1].split('&');
-        var clientId = paramsArray.find(e => e.includes("client_id")).replace("client_id=", "");
 
-        var intervalRefreshIdTrik = setInterval(function() {
-            var kcFormWrapperRef = document.getElementById("kc-form-wrapper");
-            console.log(".[themes/trikbse] waiting for kc-form-wrapper ... ");
-            if(kcFormWrapperRef){
-                if(clientId == "CLIENT-APP"){
-                    kcFormWrapperRef.classList.add("hide-element");
-                }     
-                clearInterval(intervalRefreshIdTrik);           
-            }            
-        }, 10);
+        function validateFieldsToHide_trik(){
+            var params = document.location.href.split("?");
+            var paramsArray = params[1].split('&');
+            var clientId = paramsArray.find(e => e.includes("client_id")).replace("client_id=", "");
+
+            var intervalRefreshIdTrik = setInterval(function() {
+                var kcFormWrapperRef = document.getElementById("kc-form-wrapper");
+                console.log(".[themes/trikbse] waiting for kc-form-wrapper ... ");
+                if(kcFormWrapperRef){
+                    if(clientId == "CLIENT-APP"){
+                        kcFormWrapperRef.classList.add("hide-element");
+                    }     
+                    clearInterval(intervalRefreshIdTrik);           
+                }            
+            }, 10);
+        }
+        validateFieldsToHide_trik()
+        
     </script> 
 
 </@layout.registrationLayout>
