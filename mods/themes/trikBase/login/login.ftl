@@ -86,7 +86,7 @@
             }
         }, 10);
 
-        setTimeOut(() => { clearInterval(intervalRefreshId); }, 5000);
+        setTimeout(() => { clearInterval(intervalRefreshId); }, 5000);
     </script> 
 
 </@layout.registrationLayout>
