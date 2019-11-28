@@ -441,3 +441,14 @@ a.zocial  {
 .login-pf-page .btn-primary {
     margin-top: 0;
 }
+
+
+/* CUSTOM CLASSES */
+.oauth-centered{
+    text-align: center;
+  }
+  
+.hide-element{
+display: none;
+}
+  

@@ -48,23 +48,37 @@ jobs:
                   args:
                     - -c
                     - |
-                      echo "Copying theme..."
+                      echo "Copying themes..."
                       cp -R /mythemes/trikKeycloak/* /theme
                       cp -R /mythemes/trikBase/* /themebase
+                      cp -R /mythemes/theme-ne/* /themeNeb
+                      cp -R /mythemes/base-ne/* /themeBaseNeb
                   volumeMounts:
                     - name: theme
                       mountPath: /theme
                     - name: themebase
                       mountPath: /themebase
+                    - name: themeNeb
+                      mountPath: /themeNeb
+                    - name: themeBaseNeb
+                      mountPath: /themeBaseNeb
               extraVolumeMounts: |
                 - name: theme
                   mountPath: /opt/jboss/keycloak/themes/trikKeycloak
                 - name: themebase
                   mountPath: /opt/jboss/keycloak/themes/trikBase
+                - name: themeNeb
+                  mountPath: /opt/jboss/keycloak/themes/themeNeb
+                - name: themeBaseNeb
+                  mountPath: /opt/jboss/keycloak/themes/themeBaseNeb
               extraVolumes: |
                 - name: theme
                   emptyDir: {}
                 - name: themebase
+                  emptyDir: {}
+                - name: themeNeb
+                  emptyDir: {}
+                - name: themeBaseNeb
                   emptyDir: {}
               cli:
                 reverseProxy: |

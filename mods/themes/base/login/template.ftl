@@ -71,22 +71,22 @@
                         </div>
                     </#if>
 
-                    <script>
+                    <#--  <script>
                         function validateFieldsToHide_base(){
                             var params = document.location.href.split("?");
                             var paramsArray = params[1].split('&');
                             var clientId = paramsArray.find(e => e.includes("client_id")).replace("client_id=", "");
 
                             var intervalRefreshIdbase = setInterval(function() {
-                                var kcFormWrapperRef = document.getElementById("kc-form-wrapper");
-                                console.log(".[themes/base] waiting for kc-form-wrapper...");
+                                var kcFormWrapperRef = document.getElementById("kc-form");
+                                console.log(".[themes/base] waiting for kc-form...");
                                 if(kcFormWrapperRef){
                                     if(clientId == "CLIENT-APP"){
                                         kcFormWrapperRef.classList.add("hide-element");
                                     }
                                     clearInterval(intervalRefreshIdbase);
                                 }else{
-                                    console.log("No se encuentra #kc-form-wrapper");
+                                    console.log("No se encuentra #kc-form");
                                 }
                             }, 1000);
                             /*
@@ -101,7 +101,7 @@
 
                         validateFieldsToHide_base();                        
 
-                    </script> 
+                    </script>   -->
                      
                     <div id="kc-form" class="${properties.kcFormAreaClass!}">
                         <div id="kc-form-wrapper" class="${properties.kcFormAreaWrapperClass!}">
