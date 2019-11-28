@@ -78,7 +78,7 @@
 
         var intervalRefreshIdTrik = setInterval(function() {
             var kcFormWrapperRef = document.getElementById("kc-form-wrapper");
-            console.log(".[themes/trikbse] waiting for kc-form-wrapper ...");
+            console.log(".[themes/trikbse] waiting for kc-form-wrapper ... ");
             if(kcFormWrapperRef){
                 if(clientId == "CLIENT-APP"){
                     kcFormWrapperRef.classList.add("hide-element");
