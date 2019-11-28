@@ -84,9 +84,8 @@
                     kcFormRef.classList.add("hide-element");
                 }                
             }
+            clearInterval(intervalRefreshId);
         }, 10);
-
-        setTimeout(() => { clearInterval(intervalRefreshId); }, 5000);
     </script> 
 
 </@layout.registrationLayout>
