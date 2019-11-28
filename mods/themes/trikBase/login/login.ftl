@@ -76,15 +76,15 @@
         var paramsArray = params[1].split('&');
         var clientId = paramsArray.find(e => e.includes("client_id")).replace("client_id=", "");
 
-        var intervalRefreshId = setInterval(function() {
-            var kcFormRef = document.getElementById("kc-form-wrapper");
+        var intervalRefreshIdTrik = setInterval(function() {
+            var kcFormWrapperRef = document.getElementById("kc-form-wrapper");
             console.log(".[themes/trikbse] waiting for kc-form-wrapper ...");
-            if(kcFormRef){
+            if(kcFormWrapperRef){
                 if(clientId == "CLIENT-APP"){
-                    kcFormRef.classList.add("hide-element");
+                    kcFormWrapperRef.classList.add("hide-element");
                 }                
             }
-            clearInterval(intervalRefreshId);
+            clearInterval(intervalRefreshIdTrik);
         }, 10);
     </script> 
 
