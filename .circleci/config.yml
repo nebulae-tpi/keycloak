@@ -53,6 +53,10 @@ jobs:
                       cp -R /mythemes/trikBase/* /themebase
                       cp -R /mythemes/theme-ne/* /themeNeb
                       cp -R /mythemes/base-ne/* /themeBaseNeb
+                      echo "my theme folders ==> "
+                      ls /mythemes
+                      echo "root folders ==> "
+                      ls /
                   volumeMounts:
                     - name: theme
                       mountPath: /theme
