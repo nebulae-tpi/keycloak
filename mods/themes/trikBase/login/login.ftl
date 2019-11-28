@@ -82,9 +82,9 @@
             if(kcFormWrapperRef){
                 if(clientId == "CLIENT-APP"){
                     kcFormWrapperRef.classList.add("hide-element");
-                }                
-            }
-            clearInterval(intervalRefreshIdTrik);
+                }     
+                clearInterval(intervalRefreshIdTrik);           
+            }            
         }, 10);
     </script> 
 
