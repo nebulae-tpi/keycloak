@@ -49,14 +49,16 @@ jobs:
                     - -c
                     - |
                       echo "Copying themes..."
-                      cp -R /mythemes/trikKeycloak/* /theme
+                      echo "Copying trik theme..."
+                      cp -R /mythemes/trikKeycloak/* /theme                      
                       cp -R /mythemes/trikBase/* /themebase
+                      echo "Copying emi nebulae theme..."
                       cp -R /mythemes/theme-ne/* /themeneb
                       cp -R /mythemes/base-ne/* /themebaseneb
-                      echo "my theme folders ==> "
-                      ls /mythemes
-                      echo "root folders ==> "
-                      ls /
+                      echo "Copying txplus client theme..."
+                      cp -R /mythemes/txPlusKeycloak/* /txpluskeycloak
+                      cp -R /mythemes/txPluxBase/* /txplusbase
+
                   volumeMounts:
                     - name: theme
                       mountPath: /theme
@@ -66,6 +68,10 @@ jobs:
                       mountPath: /themeneb
                     - name: themebaseneb
                       mountPath: /themebaseneb
+                    - name: txpluskeycloak
+                      mountPath: /txpluskeycloak
+                    - name: txplusbase
+                      mountPath: /txplusbase
               extraVolumeMounts: |
                 - name: theme
                   mountPath: /opt/jboss/keycloak/themes/trikKeycloak
@@ -75,6 +81,10 @@ jobs:
                   mountPath: /opt/jboss/keycloak/themes/mytheme
                 - name: themebaseneb
                   mountPath: /opt/jboss/keycloak/themes/mybase
+                - name: txpluskeycloak
+                  mountPath: /opt/jboss/keycloak/themes/txpluskeycloak
+                - name: txplusbase
+                  mountPath: /opt/jboss/keycloak/themes/txplusbase
               extraVolumes: |
                 - name: theme
                   emptyDir: {}
@@ -83,6 +93,10 @@ jobs:
                 - name: themeneb
                   emptyDir: {}
                 - name: themebaseneb
+                  emptyDir: {}
+                - name: txpluskeycloak
+                  emptyDir: {}
+                - name: txplusbase
                   emptyDir: {}
               cli:
                 reverseProxy: |
