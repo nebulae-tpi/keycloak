@@ -50,11 +50,11 @@ jobs:
                     - |
                       echo "Copying themes..."
                       
-                      # cp -R /mythemes/trikKeycloak/* /theme  
-                      # cp -R /mythemes/trikBase/* /themebase
+                      cp -R /mythemes/trikKeycloak/* /theme  
+                      cp -R /mythemes/trikBase/* /themebase
 
-                      # cp -R /mythemes/theme-ne/* /themeneb
-                      # cp -R /mythemes/base-ne/* /themebaseneb
+                      cp -R /mythemes/theme-ne/* /themeneb
+                      cp -R /mythemes/base-ne/* /themebaseneb
 
                       # cp -R /mythemes/txPlusKeycloak/* /txpluskeycloak
                       # cp -R /mythemes/txPlusBase/* /txplusbase
@@ -62,52 +62,52 @@ jobs:
 
                   volumeMounts:
                     # Trik theme
-                    # - name: theme
-                    #   mountPath: /theme
-                    # - name: themebase
-                    #   mountPath: /themebase                    
+                    - name: theme
+                      mountPath: /theme
+                    - name: themebase
+                      mountPath: /themebase                    
                     # txplus theme for client
                     # - name: txpluskeycloak
                     #   mountPath: /txpluskeycloak
                     # - name: txplusbase
                     #   mountPath: /txplusbase
                     # Nebula theme
-                    # - name: themeneb
-                    #   mountPath: /themeneb
-                    # - name: themebaseneb
-                    #   mountPath: /themebaseneb
+                    - name: themeneb
+                      mountPath: /themeneb
+                    - name: themebaseneb
+                      mountPath: /themebaseneb
               extraVolumeMounts: |
                 # Trik theme 
-                # - name: theme
-                #   mountPath: /opt/jboss/keycloak/themes/trikKeycloak
-                # - name: themebase
-                #   mountPath: /opt/jboss/keycloak/themes/trikBase
+                - name: theme
+                  mountPath: /opt/jboss/keycloak/themes/trikKeycloak
+                - name: themebase
+                  mountPath: /opt/jboss/keycloak/themes/trikBase
                 # txplus theme for client
                 # - name: txpluskeycloak
                 #   mountPath: /opt/jboss/keycloak/themes/txpluskeycloak
                 # - name: txplusbase
                 #   mountPath: /opt/jboss/keycloak/themes/txplusbase   
                 # nebula theme
-                # - name: themeneb
-                #   mountPath: /opt/jboss/keycloak/themes/mytheme
-                # - name: themebaseneb
-                #   mountPath: /opt/jboss/keycloak/themes/mybase
+                - name: themeneb
+                  mountPath: /opt/jboss/keycloak/themes/mytheme
+                - name: themebaseneb
+                  mountPath: /opt/jboss/keycloak/themes/mybase
               extraVolumes: |
                 # Trik theme
-                # - name: theme
-                #   emptyDir: {}
-                # - name: themebase
-                #   emptyDir: {}
+                - name: theme
+                  emptyDir: {}
+                - name: themebase
+                  emptyDir: {}
                 # txplus theme for client
                 # - name: txpluskeycloak
                 #   emptyDir: {}
                 # - name: txplusbase
                 #   emptyDir: {}
                 # nebula theme
-                # - name: themeneb
-                #   emptyDir: {}
-                # - name: themebaseneb
-                #   emptyDir: {}
+                - name: themeneb
+                  emptyDir: {}
+                - name: themebaseneb
+                  emptyDir: {}
               cli:
                 reverseProxy: |
                   /subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding, value=true)
