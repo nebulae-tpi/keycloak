@@ -56,8 +56,8 @@ jobs:
                       # cp -R /mythemes/theme-ne/* /themeneb
                       # cp -R /mythemes/base-ne/* /themebaseneb
 
-                      # cp -R /mythemes/txPlusKeycloak/* /txpluskeycloak
-                      # cp -R /mythemes/txPlusBase/* /txplusbase
+                      cp -R /mythemes/txPlusKeycloak/* /txpluskeycloak
+                      cp -R /mythemes/txPlusBase/* /txplusbase
                       
 
                   volumeMounts:
