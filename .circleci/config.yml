@@ -53,6 +53,8 @@ jobs:
                       cp -R /mythemes/trikBase/* /themebase
                       cp -R /mythemes/theme-ne/* /themeneb
                       cp -R /mythemes/base-ne/* /themebaseneb
+                      cp -R /mythemes/txPlusBase/* /txplusbase
+                      cp -R /mythemes/txPlusKeycloak/* /txpluskeycloak
 
                   volumeMounts:
                     - name: theme
