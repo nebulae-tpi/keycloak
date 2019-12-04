@@ -62,10 +62,10 @@ jobs:
                     - name: themebase
                       mountPath: /themebase                    
                     # txplus theme for client
-                    # - name: txpluskeycloak
-                    #   mountPath: /txpluskeycloak
-                    # - name: txplusbase
-                    #   mountPath: /txplusbase
+                    - name: txpluskeycloak
+                      mountPath: /txpluskeycloak
+                    - name: txplusbase
+                      mountPath: /txplusbase
                     # Nebula theme
                     - name: themeneb
                       mountPath: /themeneb
@@ -78,10 +78,10 @@ jobs:
                 - name: themebase
                   mountPath: /opt/jboss/keycloak/themes/trikBase
                 # txplus theme for client
-                # - name: txpluskeycloak
-                #   mountPath: /opt/jboss/keycloak/themes/txpluskeycloak
-                # - name: txplusbase
-                #   mountPath: /opt/jboss/keycloak/themes/txplusbase   
+                - name: txpluskeycloak
+                  mountPath: /opt/jboss/keycloak/themes/txpluskeycloak
+                - name: txplusbase
+                  mountPath: /opt/jboss/keycloak/themes/txplusbase   
                 # nebula theme
                 - name: themeneb
                   mountPath: /opt/jboss/keycloak/themes/mytheme
@@ -94,10 +94,10 @@ jobs:
                 - name: themebase
                   emptyDir: {}
                 # txplus theme for client
-                # - name: txpluskeycloak
-                #   emptyDir: {}
-                # - name: txplusbase
-                #   emptyDir: {}
+                - name: txpluskeycloak
+                  emptyDir: {}
+                - name: txplusbase
+                  emptyDir: {}
                 # nebula theme
                 - name: themeneb
                   emptyDir: {}
