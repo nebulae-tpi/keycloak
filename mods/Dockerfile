@@ -6,5 +6,5 @@ COPY keycloak /mythemes
 COPY themes/trikBase /mythemes/trikBase
 COPY themes/trikKeycloak /mythemes/trikKeycloak
 # txplus client theme
-COPY themes/txPlusBase /mythemes/txPlusBase
-COPY themes/txPlusKeycloak /mythemes/txPlusKeycloak
+# COPY themes/txPlusBase /mythemes/txPlusBase
+# COPY themes/txPlusKeycloak /mythemes/txPlusKeycloak
