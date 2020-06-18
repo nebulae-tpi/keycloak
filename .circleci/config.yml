@@ -57,7 +57,7 @@ jobs:
                       cp -R /mythemes/base-ne/* /themebaseneb
                       echo "Copying txplus client theme..."
                       cp -R /mythemes/txPlusKeycloak/* /txpluskeycloak
-                      cp -R /mythemes/txPluxBase/* /txplusbase
+                      cp -R /mythemes/txPlusBase/* /txplusbase
 
                   volumeMounts:
                     - name: theme
