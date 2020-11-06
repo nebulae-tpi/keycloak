@@ -49,9 +49,6 @@ jobs:
                     - -c
                     - |
                       echo "Copying themes..."
- #                     echo "Copying trik theme..."
-#                      cp -R /mythemes/trikKeycloak/* /theme                      
-#                      cp -R /mythemes/trikBase/* /themebase
                       echo "Copying emi nebulae theme..."
                       cp -R /mythemes/theme-ne/* /themeneb
                       cp -R /mythemes/base-ne/* /themebaseneb
@@ -73,10 +70,6 @@ jobs:
                     - name: txplusbase
                       mountPath: /txplusbase
               extraVolumeMounts: |
-#                - name: theme
-#                  mountPath: /opt/jboss/keycloak/themes/trikKeycloak
-#                - name: themebase
-#                  mountPath: /opt/jboss/keycloak/themes/trikBase
                 - name: themeneb
                   mountPath: /opt/jboss/keycloak/themes/mytheme
                 - name: themebaseneb
