@@ -49,26 +49,15 @@ jobs:
                     - -c
                     - |
                       echo "Copying themes..."
-                      echo "Copying emi nebulae theme..."
-                      cp -R /mythemes/theme-ne/* /themeneb
-                      cp -R /mythemes/base-ne/* /themebaseneb
                       echo "Copying txplus client theme..."
                       cp -R /mythemes/txPlusKeycloak/* /txpluskeycloak
                       cp -R /mythemes/txPlusBase/* /txplusbase
                   volumeMounts:
-                    - name: themeneb
-                      mountPath: /themeneb
-                    - name: themebaseneb
-                      mountPath: /themebaseneb
                     - name: txpluskeycloak
                       mountPath: /txpluskeycloak
                     - name: txplusbase
                       mountPath: /txplusbase
               extraVolumeMounts: |
-                - name: themeneb
-                  mountPath: /opt/jboss/keycloak/themes/mytheme
-                - name: themebaseneb
-                  mountPath: /opt/jboss/keycloak/themes/mybase
                 - name: txpluskeycloak
                   mountPath: /opt/jboss/keycloak/themes/txpluskeycloak
                 - name: txplusbase
