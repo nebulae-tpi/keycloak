@@ -59,9 +59,9 @@ jobs:
                       mountPath: /txplusbase
               extraVolumeMounts: |
                 - name: txpluskeycloak
-                  mountPath: /opt/jboss/keycloak/themes/txpluskeycloak
+                  mountPath: /opt/jboss/keycloak/themes/txPlusKeycloak
                 - name: txplusbase
-                  mountPath: /opt/jboss/keycloak/themes/txplusbase
+                  mountPath: /opt/jboss/keycloak/themes/txPlusBase
               extraVolumes: |
                 - name: themeneb
                   emptyDir: {}
