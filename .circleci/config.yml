@@ -55,12 +55,7 @@ jobs:
                       echo "Copying txplus client theme..."
                       cp -R /mythemes/txPlusKeycloak/* /txpluskeycloak
                       cp -R /mythemes/txPlusBase/* /txplusbase
-
                   volumeMounts:
-                    - name: theme
-                      mountPath: /theme
-                    - name: themebase
-                      mountPath: /themebase
                     - name: themeneb
                       mountPath: /themeneb
                     - name: themebaseneb
@@ -79,10 +74,6 @@ jobs:
                 - name: txplusbase
                   mountPath: /opt/jboss/keycloak/themes/txplusbase
               extraVolumes: |
-                - name: theme
-                  emptyDir: {}
-                - name: themebase
-                  emptyDir: {}
                 - name: themeneb
                   emptyDir: {}
                 - name: themebaseneb
