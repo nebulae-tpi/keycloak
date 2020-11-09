@@ -5,7 +5,7 @@
     <#elseif section = "form">
     <div id="kc-form" <#if realm.password && social.providers??>class="${properties.kcContentWrapperClass!}"</#if>>
     <#--  ${properties.kcFormSocialAccountContentClass!} ${properties.kcFormSocialAccountClass!} -->
-      <div style="display: none;" id="kc-form-wrapper" <#if realm.password && social.providers??>class=" "</#if>>
+      <div id="kc-form-wrapper" <#if realm.password && social.providers??>class=" "</#if>>
         <#if realm.password>
             <form id="kc-form-login" onsubmit="login.disabled = true; return true;" action="${url.loginAction}" method="post">
                 <div class="${properties.kcFormGroupClass!}">
@@ -72,20 +72,24 @@
     </#if>
 
     <script>
-        var params = document.location.href.split("?");
-        var paramsArray = params[1].split('&');
-        var clientId = paramsArray.find(e => e.includes("client_id")).replace("client_id=", "");
-
-        var intervalRefreshId = setInterval(function() {
-            var kcFormRef = document.getElementById("kc-form-wrapper");
-            console.log("waiting for kc-form..");
-            if(kcFormRef){
-                if(clientId == "CLIENT-APP"){
-                    kcFormRef.classList.add("hide-element");
-                }
-                clearInterval(intervalRefreshId);
-            }
-        }, 10);
+        function validateFieldsToHide_txplus(){
+            var params = document.location.href.split("?");
+            var paramsArray = params[1].split('&');
+            var clientId = paramsArray.find(e => e.includes("client_id")).replace("client_id=", "");
+            var intervalRefreshIdTxplus = setInterval(function() {
+                var kcFormWrapperRef = document.getElementById("kc-form-wrapper");
+                console.log(".[themes/txplus] waiting for kc-form-wrapper ... ");
+                if(kcFormWrapperRef){
+                    console.log(clientId);
+                    if(clientId == "CLIENT-APP"){
+                        kcFormWrapperRef.classList.add("hide-element");
+                    } 
+                    clearInterval(intervalRefreshIdTxplus);           
+                }            
+            }, 10);
+        }
+        validateFieldsToHide_txplus()
+        
     </script> 
 
 </@layout.registrationLayout>
