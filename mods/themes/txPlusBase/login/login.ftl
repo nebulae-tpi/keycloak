@@ -54,7 +54,7 @@
         </div>
         <#if realm.password && social.providers??>
         <#--  ${properties.kcFormSocialAccountContentClass!}  ${properties.kcFormSocialAccountClass!}-->
-            <div id="kc-social-providers" class="">
+            <div id="kc-social-providers">
                 <ul class="${properties.kcFormSocialAccountListClass!} <#if social.providers?size gt 4>${properties.kcFormSocialAccountDoubleListClass!}</#if>">
                     <#list social.providers as p>
                         <li class="${properties.kcFormSocialAccountListLinkClass!}"><a href="${p.loginUrl}" id="zocial-${p.alias}" class="zocial ${p.providerId}"> <span>${p.displayName}</span></a></li>
@@ -78,12 +78,16 @@
             var clientId = paramsArray.find(e => e.includes("client_id")).replace("client_id=", "");
             var intervalRefreshIdTxplus = setInterval(function() {
                 var kcFormWrapperRef = document.getElementById("kc-form-wrapper");
+                var kcSocialProviders = document.getElementById("kc-social-providers");
                 console.log(".[themes/txplus] waiting for kc-form-wrapper ... ");
                 if(kcFormWrapperRef){
                     console.log(clientId);
                     if(clientId == "CLIENT-APP"){
                         kcFormWrapperRef.classList.add("hide-element");
                     } 
+                    else if(kcSocialProviders){
+                        kcSocialProviders.classList.add("hide-element");
+                    }
                     clearInterval(intervalRefreshIdTxplus);           
                 }            
             }, 10);
