@@ -77,15 +77,16 @@
             var paramsArray = params[1].split('&');
             var clientId = paramsArray.find(e => e.includes("client_id")).replace("client_id=", "");
             var intervalRefreshIdTxplus = setInterval(function() {
-                var kcFormWrapperRef = document.getElementById("kc-form-wrapper");
-                var kcSocialProviders = document.getElementById("kc-social-providers");
+                const kcFormWrapperRef = document.getElementById("kc-form-wrapper");
+                const kcSocialProviders = document.getElementById("kc-social-providers");
                 console.log(".[themes/txplus] waiting for kc-form-wrapper ... ");
                 if(kcFormWrapperRef){
-                    console.log(clientId);
                     if(clientId == "CLIENT-APP"){
                         kcFormWrapperRef.classList.add("hide-element");
                     } 
-                    
+                    else if(kcSocialProviders){
+                        kcSocialProviders.classList.add("hide-element");
+                    }
                     clearInterval(intervalRefreshIdTxplus);           
                 }            
             }, 10);
