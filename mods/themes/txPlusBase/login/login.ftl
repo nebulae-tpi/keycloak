@@ -85,9 +85,7 @@
                     if(clientId == "CLIENT-APP"){
                         kcFormWrapperRef.classList.add("hide-element");
                     } 
-                    else if(kcSocialProviders){
-                        kcSocialProviders.classList.add("hide-element");
-                    }
+                    
                     clearInterval(intervalRefreshIdTxplus);           
                 }            
             }, 10);
