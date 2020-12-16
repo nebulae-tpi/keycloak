@@ -45,9 +45,9 @@
 
     <div class="${properties.kcFormCardClass!} <#if displayWide>${properties.kcFormCardAccountClass!}</#if>">
         <div class="form-log">
-            <div class="logoP">
+            <#-- <div class="logoP">
                 <img src="${url.resourcesPath}/img/logo-tx-pluss.png">
-            </div>
+            </div> -->
             
             <div class="contentForm">
 
